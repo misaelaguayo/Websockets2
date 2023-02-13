@@ -171,7 +171,7 @@ ball.on("collisionend", () => {
 // start-snippet{lose-condition}
 // Loss condition
 ball.on("exitviewport", () => {
-  alert("You lose!");
+  // alert("You lose!");
 });
 // end-snippet{lose-condition}
 
