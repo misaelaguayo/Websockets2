@@ -40,6 +40,7 @@
     "*.{js,ts,css,scss,md}": "prettier --write"
   },
   "dependencies": {
+    "@types/ws": "^8.5.4",
     "excalibur": "0.27.0",
     "ws": "^8.12.0"
   }
