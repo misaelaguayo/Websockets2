@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently --kill-others \"npm run frontend\" \"npm run backend\"",
     "frontend": "parcel serve index.html",
-    "backend": "node src/backend/server.ts",
+    "backend": "ts-node src/backend/server.ts",
     "build": "parcel build ./index.html --dist-dir ./dist --public-url ./",
     "typecheck": "tsc -p . --noEmit",
     "test": "npm run build && ex-test -d ./dist -t ./test/test.js"
@@ -42,6 +42,7 @@
   "dependencies": {
     "@types/ws": "^8.5.4",
     "excalibur": "0.27.0",
+    "ts-node": "^10.9.1",
     "ws": "^8.12.0"
   }
 }
