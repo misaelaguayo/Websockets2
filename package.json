@@ -4,7 +4,9 @@
   "private": true,
   "description": "",
   "scripts": {
-    "start": "parcel serve index.html",
+    "start": "concurrently --kill-others \"npm run frontend\" \"npm run backend\"",
+    "frontend": "parcel serve index.html",
+    "backend": "node src/backend/server.ts",
     "build": "parcel build ./index.html --dist-dir ./dist --public-url ./",
     "typecheck": "tsc -p . --noEmit",
     "test": "npm run build && ex-test -d ./dist -t ./test/test.js"
@@ -21,12 +23,13 @@
   "homepage": "https://github.com/excaliburjs/template-ts-parcel#readme",
   "assetsPath": "static/",
   "devDependencies": {
+    "@excaliburjs/testing": "0.25.1",
+    "concurrently": "^7.6.0",
     "husky": "4.3.8",
     "lint-staged": "10.5.4",
     "parcel": "2.8.3",
     "prettier": "2.8.4",
-    "typescript": "4.9.5",
-    "@excaliburjs/testing": "0.25.1"
+    "typescript": "4.9.5"
   },
   "husky": {
     "hooks": {
@@ -37,6 +40,7 @@
     "*.{js,ts,css,scss,md}": "prettier --write"
   },
   "dependencies": {
-    "excalibur": "0.27.0"
+    "excalibur": "0.27.0",
+    "ws": "^8.12.0"
   }
 }
