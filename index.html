@@ -10,6 +10,7 @@
       const ws = new WebSocket("ws://localhost:8080");
       ws.addEventListener("open", () => {
         console.log("We are connected");
+        // ws.send(Math.floor(Math.random() * 6) + 1);
         ws.send("How are you?");
       });
 

@@ -1,6 +1,9 @@
 import * as WebSocketServer from "ws";
 // create new websocket server
 const wss = new WebSocketServer.Server({ port: 8080 });
+// let players: Array<number> = [];
+
+// setInterval(() => {console.log(players.length), 1000})
 
 wss.on("connection", (ws) => {
   console.log("new client connected");
