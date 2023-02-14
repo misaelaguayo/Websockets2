@@ -1,4 +1,15 @@
 import { Actor, CollisionType, Color, Engine, vec } from "excalibur";
+
+const ws = new WebSocket("ws://localhost:8080");
+ws.addEventListener("open", () => {
+  console.log("We are connected");
+  // ws.send(Math.floor(Math.random() * 6) + 1);
+  ws.send("How are you?");
+});
+
+ws.addEventListener("message", function (event) {
+  console.log(event.data);
+});
 // game.js
 
 // start-snippet{create-engine}
