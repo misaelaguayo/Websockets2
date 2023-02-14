@@ -9,40 +9,7 @@ const game = new Engine({
   width: 800,
   height: 600,
 });
-// end-snippet{create-engine}
 
-// start-snippet{create-paddle}
-// Create an actor with x position of 150px,
-// y position of 40px from the bottom of the screen,
-// width of 200px, height and a height of 20px
-const paddle = new Actor({
-  x: 150,
-  y: game.drawHeight - 40,
-  width: 200,
-  height: 20,
-  // Let's give it some color with one of the predefined
-  // color constants
-  color: Color.Chartreuse,
-});
-
-// Make sure the paddle can partipate in collisions, by default excalibur actors do not collide with each other
-// CollisionType.Fixed is like an object with infinite mass, and cannot be moved, but does participate in collision.
-paddle.body.collisionType = CollisionType.Fixed;
-
-// `game.add` is the same as calling
-// `game.currentScene.add`
-game.add(paddle);
-// end-snippet{create-paddle}
-
-// start-snippet{mouse-move}
-// Add a mouse move listener
-game.input.pointers.primary.on("move", (evt) => {
-  paddle.pos.x = evt.worldPos.x;
-});
-// end-snippet{mouse-move}
-
-// start-snippet{create-ball}
-// Create a ball at pos (100, 300) to start
 const ball = new Actor({
   x: 100,
   y: 300,
@@ -58,17 +25,8 @@ setTimeout(() => {
   ball.vel = ballSpeed;
 }, 1000);
 
-// Set the collision Type to passive
-// This means "tell me when I collide with an emitted event, but don't let excalibur do anything automatically"
 ball.body.collisionType = CollisionType.Passive;
-// Other possible collision types:
-// "ex.CollisionType.PreventCollision - this means do not participate in any collision notification at all"
-// "ex.CollisionType.Active - this means participate and let excalibur resolve the positions/velocities of actors after collision"
-// "ex.CollisionType.Fixed - this means participate, but this object is unmovable"
-
-// Add the ball to the current scene
 game.add(ball);
-// end-snippet{create-ball}
 
 // start-snippet{screen-collision}
 // Wire up to the postupdate event
@@ -90,10 +48,10 @@ ball.on("postupdate", () => {
   if (ball.pos.y < ball.height / 2) {
     ball.vel.y = ballSpeed.y;
   }
+  if (ball.pos.y + ball.height / 2 > game.drawHeight) {
+    ball.vel.y = ballSpeed.y * -1;
+  }
 });
-// end-snippet{screen-collision}
-
-// start-snippet{create-bricks}
 // Build Bricks
 
 // Padding between bricks
@@ -167,13 +125,6 @@ ball.on("collisionend", () => {
 });
 
 // end-snippet{ball-brick-collision}
-
-// start-snippet{lose-condition}
-// Loss condition
-ball.on("exitviewport", () => {
-  // alert("You lose!");
-});
-// end-snippet{lose-condition}
 
 // start-snippet{start-game}
 // Start the engine to begin the game.
